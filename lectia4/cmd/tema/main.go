@@ -1,58 +1,56 @@
 package main
 
-import "log"
+import "fmt"
 
-type Masina struct {
-	Marca        string
-	Model        string
-	AnFabricatie int
-	Combustibil  string
-	//PutereCai int
-	PutereKW  float64
-	Greutate  float64
-	Tractiune string
+type produs struct {
+	Nume      string
+	Pret      int
+	Cantitate int
+}
+
+func (produsCurent *produs) aprovizioneazaStoc(cantitateaprovizionata int) {
+	if cantitateaprovizionata < 0 {
+		fmt.Println("Nu se poate aproviziona!")
+	} else {
+		produsCurent.Cantitate += cantitateaprovizionata
+		fmt.Println("Am aprovizionat stocul de: ", produsCurent.Nume, "cantitate disponibila:", produsCurent.Cantitate, ", pret: ", produsCurent.Pret)
+	}
+}
+
+func (produsCurent *produs) cumparaProdus(cantitatecumparata int) {
+	pretTotalProdus := 0
+	if cantitatecumparata > 0 {
+
+		if produsCurent.Cantitate >= cantitatecumparata {
+			pretTotalProdus = cantitatecumparata * produsCurent.Pret
+			produsCurent.Cantitate -= cantitatecumparata
+			fmt.Println("Ai achizitionat produsul:", produsCurent.Nume, "pretul achizitiei", pretTotalProdus, "Se actualizeaza stocul de produse disponibile", produsCurent.Cantitate, ".")
+		} else {
+			fmt.Println("Nu avem in stoc cantitatea suficienta de ", produsCurent.Nume, ". Cantitatea disponibila in stoc:", produsCurent.Cantitate)
+		}
+	} else {
+		fmt.Println("Nu se poate achizitiona produsul!")
+	}
 }
 
 func main() {
+	stocProduse := [3]produs{
+		{Nume: "Masti chirurgicale",
+			Pret: 3,
+		},
 
-	//Conversie kw la cai putere cu formula 1 kw = 1,34102 hp
+		{Nume: "Alcool sanitar",
+			Pret:      8,
+			Cantitate: 190},
 
-	Masina1 := Masina{Marca: "Subaru", Model: "Impreza", AnFabricatie: 2010, Combustibil: "Benzina", PutereKW: 198, Greutate: 1833, Tractiune: "integrala"}
-	Masina2 := Masina{Marca: "BUGATTI", Model: "CHIRON", AnFabricatie: 2019, Combustibil: "Benzina", PutereKW: 1103, Greutate: 1995, Tractiune: "integrala"}
-
-	log.Println("Aceasta masina are caracteristicile: ", Masina1)
-	performanta(Masina1)
-	Masina1.tuning()
-
-	log.Println("Aceasta masina are caracteristicile: ", Masina2)
-	performanta(Masina2)
-	Masina2.tuning()
-
-}
-
-func performanta(power Masina) {
-
-	if power.PutereKW > 150 && (power.PutereKW/power.Greutate > 0.5) {
-		log.Println("Bolid")
-	} else {
-		log.Println("Masina de tatae")
-
+		{Nume: "Dezinfectant",
+			Pret:      12,
+			Cantitate: 200},
 	}
-	PutereCai := power.PutereKW * 1.34102
-	//am printat mai inatai puterea in KW deoarece cu ea a inceput utilizatorul
-	log.Println("Raportul putere greutate in kw putere per kg este: ", power.PutereKW/power.Greutate)
-	log.Println("Raportul putere greutate in cai putere per kg este: ", PutereCai/power.Greutate)
-}
 
-func (fun Masina) tuning() {
-	switch {
-	case fun.Tractiune == "fata":
-		log.Println("no donuts")
+	stocProduse[2].aprovizioneazaStoc(-9)
+	stocProduse[1].cumparaProdus(180)
+	stocProduse[1].cumparaProdus(-11)
+	stocProduse[0].cumparaProdus(2)
 
-	case fun.Tractiune == "spate":
-		log.Println("do donuts!!!")
-
-	case fun.Tractiune == "integrala":
-		log.Println("no donuts but volvo safe")
-	}
 }
