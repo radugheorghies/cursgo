@@ -1,7 +1,5 @@
 package main
 
-import "log"
-
 func main() {
 	// x := -3
 	// if x > -1 {
@@ -35,21 +33,40 @@ func main() {
 	// 	}
 	// }
 
+	// i := 0
+
+	// for i < 10 {
+	// 	i++
+	// 	log.Println(i)
+	// 	// if i > 10 {
+	// 	// 	break
+	// 	// }
+	// }
+
 	// switch
 
-	i := 4
-	j := 0
+	// i := 4
+	// j := 0
 
-	switch {
-	case i == 0:
-		log.Println("i este 0")
-		break
-	case i == 1:
-		log.Println("i este 1")
-	case i < 5:
-		log.Println("i este < 5")
-	case j == 0:
-		log.Println("j este 0")
-	}
+	// switch i {
+	// case 1:
+	// 	//
+	// default:
+	// 	//
+	// }
+
+	// switch {
+	// case i == 0:
+	// 	log.Println("i este 0")
+	// 	break
+	// case i == 1:
+	// 	log.Println("i este 1")
+	// case i < 5:
+	// 	log.Println("i este < 5")
+	// case j == 0:
+	// 	log.Println("j este 0")
+	// default:
+	// 	///
+	// }
 
 }
